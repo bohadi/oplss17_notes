@@ -1,2 +1,2 @@
-brady dependent types and idris 1
+brady dependent types and idris 3
 ────────────────────────────────────────────────

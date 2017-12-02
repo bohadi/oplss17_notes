@@ -1,2 +1,2 @@
-brady dependent types and idris 2
+krishnaswami dependent types 2
 ────────────────────────────────────────────────

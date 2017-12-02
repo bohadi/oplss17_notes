@@ -1,0 +1,44 @@
+pfenning substructural logic and concurrency 4
+────────────────────────────────────────────────
+
+1936 - origin of computer science
+    λ calculus (programming language theory)
+    TMs (hardware architecture, complexity theory)
+
+\ calc + intuitionistic logic -> type theory
+TMs    +   subsingleton logic -> ? ss type theory
+
+linear communicating automata (lca)
+$ a1 ... an q b1 ... bn q' ... $
+    like a concurrent TM
+    multiple r/w heads q,q'...
+a q    q a     q      q      q         q
+---RL  ---RR  ---WL  ---WR  ---SPAWN  ---HALT
+ q'     q'    a q'   q'a    q'q"       .
+
+SSL
+A ::= +{l:A_l}_l∈L|&{l:A_l}_l∈L|1}
+
+not quite tt but automata to logic,
+LCAs -> SSL  typechecking safety
+
+linear logic
+adds rule of exchange to ordered logic
+    A∙B ≡ A∘B ≡ A⊚B
+   fuse  twist  tensor
+    A\B ≡ B/A ≡ A-oB
+    under over arrow
+
+storeA = &{ins: A\storeA,        this is a stack
+           del: +{none: 1,
+                  some: A ∙ storeA}}
+storeA = &{ins: A\storeA,        this is a queue
+           del: +{none: 1,
+                  some: A ∘ storeA}}
+how much concurrency is there in this system?
+every insert or delete is constant response time
+    the data structure can immediately process a new msg
+on the other hand,
+    it does a lot of computation for each cmd
+
+

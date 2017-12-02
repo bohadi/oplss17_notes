@@ -1,0 +1,42 @@
+pfenning substructural logic and concurrency 5
+────────────────────────────────────────────────
+combining logics, copying and sharing
+
+async comm
+pi calculus async cannot simulate sync version
+but in
+typed pi calc, async and sync equal in expressiveness
+
+proc(R.k;P) proc(caseL (l=>Ql))
+-------------------------
+proc(P)     proc(Qk)
+
+proc(P|(R.k;<->)) proc(caseL(l=Ql))
+-------------------------------
+proc(P) proc(R.k;<->)
+        -----------------------
+        proc(<->)    proc(Qk)
+
+modes
+
+combining logics
+map
+copy and drop, contraction and weakening
+shifts up and down
+
+declaration of independence
+    ψ |= Am requires ψ≥m (i.e. for each Bk∈ψ,k>m)
+constitution
+    y k≥m then σ(k)≥σ(m)
+
+recap
+ssl logic ordered
+concurrent tm
+linear logic, preservation and progress
+    concurrent w/o deadlock
+copying semantics, broadcast, sharing
+    computation not just reduction
+        join and destruct proofs/processes
+        can have deadlock
+
+

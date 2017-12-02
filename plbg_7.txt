@@ -1,0 +1,68 @@
+harper licata pl bg 7
+────────────────────────────────────────────────
+dependent types
+
+Γ|=A type
+Γ|=a:A     where A can mention vars from Γ
+  e.g.
+x:N|=even(x) type
+
+pi types
+∀ forall / Π type / type level function
+
+Γ|Atype Γ,x:A|=b:Btype
+------------------  
+Γ|=λx:A.b:Πx:A.B
+
+Γ|=f:Πx:A.B Γ|=a:A
+------------------ 
+Γ|=fa:B[a/x]      
+
+similarly,
+sigma types
+
+Γ|Atype Γ,x:A|=b:Btype
+------------------  
+Γ|=Σx:A.Btype
+
+Γ|=a:A Γ|=b:B[a/x]
+------------------
+Γ|=(a,b):Σx:A.B
+
+pick representation for a, b depends on a's type
+sigma is a strong ∃, projects the witness for use
+
+Γ|=p:Σx:A.B
+--------------------------
+Γ|=fst(p):A,snd(p):B[fst(p)/x]
+
+Σ and Π types generalize products (pairs) and functions
+    (a coproduct generalization is fairly redundant)
+fst(a,b)≡a
+snd(a,b)≡b
+p:Σx:A.B≡(fst p,snd p)
+
+n is even := Σx:N n=2x
+this can be encoded as Σpair type
+
+-------
+Γ|=Ntype
+
+-------
+Γ|=0:N
+
+Γ|=n:N
+-----------
+Γ|=succ(n):N
+
+structural recursion vs general recursion
+
+this formal system has rules for { Π Σ id N + }
+we can do different things with it
+>interpret as a computational model
+    terms as programs     (programming language)
+    (λx.b)a ≡ b[a/x]   rule
+    (λx.b)a -> b[a/x]  steps to
+>interpret as a mathematical model
+    constructive maths (HoTT)
+

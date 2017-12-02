@@ -1,0 +1,194 @@
+harper licata pl bg 8
+────────────────────────────────────────────────
+computational cf. formal type theory
+distinction
+
+type theory, formally
+    formal system given by an inductive defn rules define
+        Γ |= M : A
+        Γ |= A type
+    consequence
+        relentlessly recursively enumerable
+
+    codification of systems of formal logic,
+                        (inductive defn of Γ |= A prop
+                                           Γ |= A true)
+    codify a notation for formal proofs of e.g. A true
+        i.e. M:A (means) M is a formal proof of proposition A
+    big idea, church/gentzen: λ calculus,
+                        codifies consequence relations
+    can now study proofs as things in themselves
+    NOTE
+        correspondence is a matter of explicit intent (by defn)
+        it is not a scientific discovery
+    Curry-Howard isomorphism (Brouwer-Heyting-Kolmogorov)
+        but... really no theory of equality for proofs,
+        true by construction
+    structural type theory
+        specify structure of formal proofs
+        context-sensitive formation conditions
+            what is a well-formed proof (a well-typed term)
+    As it stands,
+    this correspondence has nothing to do with computation
+
+among other necessities, a proper notion of computation,
+requires a proper notion of cost
+    gentzens metamathematical device - proof simplification
+        Γ |= M ≡ N : A  (some kind of structural equivalence
+        Γ |= A ≡ B type  doesn't really express equality of meaning)
+        1. begins to address when are two formal proofs the same?
+        2. showing when there is no formal proof
+    the (nondeterministic) simplification can be seen as a
+    early theory of computation, but with this
+        still lack a full theory of correctness and complexity
+    a formal type theory alone is NOT a theory of computation
+    Brouwer: formal logic is mathematics (not a foundation)
+        i.e. Kleene's Introduction to Meta_mathematics_
+    something else is needed, 
+        that which we now call computer science
+    
+computational type theory
+    not a formal system
+    start with computation/a programming language
+        (need not be fully specified), i.e.
+            church's law: all ideas of computation,
+            as regards over N, they are all the same
+        scientific law, not abs... just current state of knowledge
+        brouwers view of mathematics
+            manifestly human activity, communicating between people
+            in particular, speaking of infinities of various kinds,
+                in a finite way
+            how is it that people can communicate?
+            analysis is that the fundamental human faculty
+                is the notion of algorithm
+            upon notion of computation, algorithm, rules
+            build a theory of truth of mathematics
+                central idea is proof
+                a prop is true when we have a proof
+                    but it is not necessarily a formal proof
+                    in any fixed system
+                        gōdels theorem: as soon as you fix
+                        the rules, 'these are all the proofs'
+                        you're wrong
+            brouwerian notion of truth
+                communication b/w people using language
+            brouwers notion of proof
+                a construction (we could call a program)
+    now we have an important scientific program!
+        explore and understand brouwers conception of truth/proof
+            the computational universe
+        semantic / behavioural conception
+            propositions-as-types principle 
+    central idea, can be seen in two ways
+        1. proof is evidence for the truth of a proposition
+               what constitutes evidence is determined
+               by the form of the proposition
+           eg) evidence for an implication is a function
+               mapping evidence for the hypothesis
+                    to evidence for the conclusion
+        2. proposition is a specification for the behaviour
+            of a program (something that is computable)
+-> the way i can communicate some infinite amount of information
+to you is not by enumerating it all one by one but by giving you
+an algorithm that tells you how to create it for yourself on demand
+            and if prop says how does a program behave
+                no description is best/canonical/priveleged
+                you can say more or less precise things about
+                    a given program
+                or, a program can satisfy many many different
+                    specifications,
+    comp tt can be thought as "behavioral" tt
+        in this view, propositions, assertions
+            instead of being e.g. a truth value
+            classifies all of its possible proofs (programs)
+        thus, the meaning of a prop
+            are the things admissible as proofs of it
+        i.e.
+            proofs show some prop ->
+            prop classify its proofs <-> types classify programs
+
+behavioral type theory
+    start w/ transition system
+        M |=> M'
+        M val
+    open-ended, no sense of "safety"
+        (cf. tm's have stuck states)
+    define types by defining
+        1. what values inhabit them
+        2. when are two values equal as elements of the type
+    types themselves and their elements are programs
+        types are given as certain values
+        specify when two types are equal (problematic)
+            equal types will have (and more in higher d)
+                equal members
+                members are equal in the same sense
+eg) judgements
+have epistemic force, about conveyance of knowledge
+    A₀type₀      (a value A is a type)
+    A₀=B₀type₀   (values A and B are equal)
+    M₀∈₀A₀       (a value M inhabits type A type₀)
+    M₀=N₀∈₀A₀    (equal values of A)
+    and you can run the types as programs
+    i.e.
+    A type means when run     A |=>* A₀ type₀
+    A = B type means when run A |=>* A₀ type₀
+                              B |=>* B₀ type₀
+                               A₀ = B₀ type₀
+    M ∈ A means when run      A |=>* A₀ type₀
+                              M |=>* M₀ ∈₀ A₀
+    M = N ∈ A means to run    A |=>* A₀ type₀
+                              M |=>* M₀ ∈₀ A₀
+                              N |=>* N₀ ∈₀ A₀
+                               M₀ = N₀ type A₀ type₀
+    the quantifier complexity of what it means
+        to be an element of a type grows unboundedly
+eg)
+nat type₀    (val nat)
+    where nat is inductively defined by
+        a. zero = zero ∈₀ nat
+        b. succ(M) = succ(M') ∈₀ nat   (canonical membership)
+            if M = M' ∈ nat              (general membership)
+eg)
+maps / functionality aka logical consequence / Entailment
+suppose A, B type
+want to define meaning of   (hypothetical judgement/spec of a map)
+    x ∈ A  >>  N ∈ B        (N is a map from A to B)
+1. if M  ∈ A,
+    then [M/x]N ∈ B
+2. if M = M' ∈ A,           (functionality / extensionality)
+    then [M/x]N = [M'/x]N ∈ B
+(there's no entity without identity)
+(what does it mean to be equal maps from A to B,
+    equal args to equal results)
+eg)
+A -> B type₀         (->(A,B) val)
+λx.M = λx.M' ∈₀ A->B
+ if x ∈ A >> M = M' ∈ B
+note
+    we have ap(M;N) w/ expected computation rules
+    fact (not a defn, but a theorem)
+        if M ∈ A->B and N ∈ A then ap(M;N) ∈ B
+    proof
+        suppose M ∈ A->B
+        M|=>*M₀ ∈ A->B and M₀=λx.M' ∈₀ A->B
+        and x ∈ A >> M' ∈ B
+        by defn of maps, [N/x]M' ∈ B
+        so ap(M;N) |=>* ap(λx.M';N) |=> [N/x]M' ∈ B ▄
+analog of maps at the level of elements,
+families of types, dependent types
+x ∈ A >> B type     (roughly "{Bx}x∈A")
+and we can talk about their equality
+x ∈ A >> B = B' type
+Πx∈A.B(x) type
+Σx∈A.B(x) type
+
+one other rich and interesting notions of type
+Ā partial elements of A
+    if they terminate, are elements of A
+    B --\ A ≡ B -> Ā
+
+higher dimensional computational type theory
+nuprl  (constable '87) -> redprl (sterling et al) 
+    nuprl.org                  redprl.org
+
+

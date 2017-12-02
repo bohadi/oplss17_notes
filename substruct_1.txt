@@ -1,0 +1,70 @@
+pfenning substructural logic and concurrency 1
+────────────────────────────────────────────────
+deductive inference
+logic studies inference not truth
+
+intuitionistic logic <-> functional programming 
+is4 modal logic      <-> staged computation (quote/eval)
+is5 modal logic      <-> distributed programming
+temporal logic       <-> partial evaluation
+  (substruct logics)
+subsingleton logic   <-> automata
+linear logic         <-> concurrent msg passing programming
+
+"my kingdom for a horse"
+richard     kingdom(k) owns(richard, k) owns(x, y) horse(y)
+owns(x,y)   ---------------------------------------------- xch (linear)
+horse(x)    kingdom(k) owns(richard, y) owns(x, k) horse(y)
+kingdom(x)
+
+linear rule can only be applied once (or x times)
+
+grammatical inference
+syntactic types s, sentence
+                n, name
+world  Alice : n
+       Bob   : n
+Alice works. : s       then works : n\s
+  ..    ..
+  n    n\s
+-----------
+     s
+Alice likes Bob. : s   then likes : n\s/n
+  ..   ..   ..
+   n  n\s/n  n       there are two parse trees depending on (n\s)/n
+----------------        provably equivalent         or      n\(s/n)
+        s
+Alice never works. : s   then never : (n\s)/(n\s)
+  ..   ..    ..
+ n  n\s/(n\s) n\s     
+----------------     
+        s
+ambiguous language is simply when there are multiple proofs (parses)
+(x\y)/z  ─||─  x\(y/z)   (equivalent)
+unlike godels T, we dont satisfy weakening, exchange, or contraction
+this weak logic allows us to refer to e.g. position of variables in context
+Ω  arbitrary ordered context
+ΩL context to the left of what we're interested in
+ΩR context to the right of what we're interested in
+in the lambda calculus under some assumptions we can exactly represent CFGs
+
+ΩL x ΩR |─ z    
+------------- \L    (function application)
+Ω y y\x Ω |─z
+
+and similar rules \R, /L, /R, and IDx ------
+∙L ∙R                                  x|─x
+left and right fuse rules s∙s
+
+
+
+
+
+2 subsingleton proofs and automata
+----------------
+3 ordered / linear proofs and concurrent programs
+----------------
+4 conccurent programming
+----------------
+5 adjoint logic, copying and sharing
+----------------

@@ -1,0 +1,44 @@
+pfenning substructural logic and concurrency 2
+────────────────────────────────────────────────
+subsingleton logic and automata
+sequent calculus
+
+cut rule for fuse destroys decidability of our substr logic
+
+logical connective meaning defined by its rules
+e.g.  _ Γ|-A__Γ|-B_ ∧  'meaning of and'
+        Γ |- A ∧ B
+
+we shouldnt need the cut rule, nor id
+    id says: if i assume x i can conclude x
+    cut says: if i prove x i can assume x
+cut elimination
+    in the system w/o cut, cut is admissible
+id elimination
+    in the system w/o id, id is admissible
+
+(+) internal choice (+)L sum
+(&) external choice (&)R product
+Ω 'duplicated' but only one parse branch will be proved
+
+subsingleton fragment
+A ::= 1 | A1(+)A2 | A1(&)A2 | φ
+ω ::= A | .
+ω |─ A
+
+proof         <-> process
+cut reduction <-> computation
+
+cut is parallel composition
+processes form a chain whose interfaces match types
+P1      P2       P3
+ω|-.:A1 A1|-.:A2 A2|-.:A3
+
+ω|─P:A A─|Q:C
+-------------cutA (processes P and Q running parallel)
+  ω|─P|Q:C
+
+rather than sequent, tree-like process calculus
+progress and preservation
+
+

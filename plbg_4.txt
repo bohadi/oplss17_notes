@@ -1,0 +1,9 @@
+harper licata pl bg 4
+────────────────────────────────────────────────
+equality of programs
+
+general recursion
+fix x is x
+-> [fix x is x/x]
+...
+bottom _|_ (non termination)

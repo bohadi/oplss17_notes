@@ -1,0 +1,58 @@
+harper licata pl bg 3
+────────────────────────────────────────────────
+duality and dispatch
+sums and products
+
+products
+t1 x t2
+ordered pair with projections
+1 unit
+
+sums
+coproduct
+0 void
+
+pattern matching sums,
+must be exhaustive to ensure progress in safety
+case -> [ei/x]ei'
+
+bool = 2 = 1 + 1
+    1 ∙ () true
+    2 ∙ () false
+    case ...
+
+type algebra (equivalent up to isomorphism)
+t x 1 ≌ t
+t1x(t2xt3) ≌ (t1xt2)xt3
+t1xt2 ≌ t2xt1
+monoids (also in sum)
+
+t->pxq ≌ t->p x t->q
+t -> 1 ≌ 1
+
+dispatch
+t1 + t2 -> p  ≅ t1->p x t2->p 
+(p^t1 x p^t2)
+
+dispatch matrix,
+objects, classes, and methods
+consider (t1 + t2) -> (p1 x p2)
+equivalently
+  t1 -> p1 x t1 -> p2
+x t2 -> p1 x t2 -> p2
+equivalently
+  t1 -> p1xp2
+x t2 -> p1xp2
+equivalently
+  t1+t2 -> p1
+x t1+t2 -> p2
+as a matrix of expressions eij
+e11 t1 -> p1 | e12 t1 -> p2   \
+---------------------------    | classes
+e21 t2 -> p1 | e22 t2 -> p2   /  (a row of columns)
+\------------------------/
+        methods (a column of rows)
+for some object we call t1+t2
+
+dynamic dispatch
+

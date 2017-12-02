@@ -1,0 +1,110 @@
+harper licata pl bg 1
+────────────────────────────────────────────────
+what do we mean by 'programming language'
+
+statics:  what do we write down
+dynamics: how do we run them
+
+statics
+    concrete syntax (linear formation, other)
+    abstract syntax
+    context-sensitive formation
+
+key idea
+abstract binding trees
+godels t
+    2 sorts
+        type τ  nat() arrow(τ1, τ1)
+        expr e  zero()
+                succ()
+                rec[τ](e, x, y, e)(e)
+                \[τ]x.e
+                ap(e1, e2)
+    critical ideas
+        α equiv: variable names dont matter
+        β sub:   [e/x]e'
+
+context-sensitive formation
+    formal typing rules
+    typing judgements
+        when does something form a type
+            τ  type  typehood
+        what is an element of a type
+            e  τ     element 
+            compositionality
+                the type of e is all and only important
+                when using e within another expression
+    typing is inductively defined
+    context of occurence matters
+        x+x, well-typing is wholly determines this
+    hypothetical judgement
+        Γ |─ e τ
+        2 properties can never be denied, 3 are defeasible
+        structural, all 5 in play (cf. substructural)
+            1. reflexivity (conclude what you assumed)
+                e τ |─ e τ
+            2. transitivity (variables are placeholders)
+                if   Γ |─ e τ and  Γ,x:τ |─ e' τ'
+                then Γ |─ [e/x]e' τ'
+          * 3. weakening (extra hypotheses don't matter)
+                if   Γ |─ e' τ'
+                then Γ,x:τ |─ e' τ'
+          * 4. contraction (one variable can stand for two)
+                if   Γ,x:τ,y:τ |─ e' τ'
+                then Γ,z:τ     |─ [e,z/x,y]e' τ'
+          * 5. exchange (order of hypotheses dont matter)
+                if   Γ,x1:τ1,x2:τ2 |─ e' τ'
+                then Γ,x2:τ2,x1:τ1 |─ e' τ'
+    e.g. T statics
+    (judgements of 5 base rules)
+    Γ |─ e τ hold iff it can be derived according to the rules
+        <- build up a derivation tree  (reasoning toward)
+        -> principle of rule induction (reasoning from)
+            must have arisen by a composition of rules
+            for the possible rules and e τ Γ, traverse space
+
+dynamics
+    how to execute?
+        states of execution s
+        s -> s'   transition  (evaluation)
+        s initial start       (s)
+        s final   end         (e val)
+    abstract machine / transition system
+    e.g. T dynamics
+        nat's are observable
+        transitions inductively defined
+        plotkin structural operational semantics
+        choices
+            eager / lazy
+            call by value / name            e->e'       (to evaluate an ap
+----------         -----------      -------------------  you must evaluate
+zero() val         \[τ]x.e val      ap(e,e2)->ap(e',e2)  what you apply)
+
+[e val]    (eager)                      (β cbn)
+-----------        ------------------------
+succ(e) val        ap(\[t]x.e, e2)->[e2/x]e
+
+    e2->e2' e val   (cbv)            e2 val     (β cbv)
+------------------------    ------------------------
+ap(e, e2)->ap(e,e2')        ap(\[t]x.e, e2)->[e2/x]e
+
+Recursor                       succ(e) val
+R ≡ rec[τ](e,x,y.e2)        --------------------
+                            R(succ(e))->[e,R(e)/xy]e
+
+1) if e val then !∃e' st e -> e'
+   (values are stuck/finalized)
+2) ∀e ∃≤1 v st v val and e ->* v
+   (multistep evaluation is a partial function, it is determined)
+   (this is what makes T and similar "functional")
+
+notice the dynamics doesnt care about types
+       it is defined only on the abstract (context less) syntax
+
+but it can be proved that coherence of dyn/stat (safety: pres and prog)
+1) if e:τ and e->e' then e':t                   (preservation)
+   a well-formed thing taking a step remains well-formed
+2) if e:τ then either e val or ∃e' e->e'        (progress)
+   a well-formed thing is either final or can take a step
+see also Tait's theorem
+

@@ -1,0 +1,4 @@
+harper licata pl bg 2
+────────────────────────────────────────────────
+logical / relation
+defined by induction on the type / (unary) predicate

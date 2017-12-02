@@ -1,0 +1,54 @@
+harper licata pl bg 5
+────────────────────────────────────────────────
+type equivalence up to isomorphism
+recursive types
+
+1. nat ≡ 1 + nat
+2. list ≡ 1 + (nat x list)
+3. tree ≡ 1 + (tree x tree)
+4. ord ≡ 1 + ord + (nat -> ord)
+5. stream ≡ nat x stream
+6. t myst ≡ t myst -> t
+7. weird ≡ (weird --\ weird)       (harpoon, --\, or partial arrow)
+    *types are not sets!
+     type which is isomorphic to its endomorphism
+     set theory doesn't model computation / continuity
+                           or divergence / partiality
+
+nat ≡ rec (t 1+t)
+  zero ≡ fold (1 . <>)
+  succ(e) ≡ fold (2 . e)
+  rec[z](e;x,y,e') ≡ fix[nat->nat](self . 
+        \[nat](u case unfold(u) {
+            1._ -> e
+           |2.x -> [self(x)/y]e'
+        }))(e)
+
+constructive type theory
+    ...math is applied computer science not vice versa
+
+defining fix
+
+t self = the type of self-referential t's
+
+intro form  self(x.e)  all self-referential t
+elim form   unroll(e)  unroll the self-reference
+
+implicit argument, self-application
+
+pl features arise from type structure
+
+y combinator
+
+fact ≡ self(this.\[nat](x ifz(x,1;x:x*unroll(this(x)))))
+fact ≡ unroll(fact)
+
+recursive types allow type definitions as solutions to type equivalences
+
+haskell and ml have recursive abstract types
+data A = ...
+    1. recursive types
+    2. abstract types
+
+
+

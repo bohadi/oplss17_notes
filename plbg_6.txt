@@ -1,0 +1,46 @@
+harper licata pl bg 6
+────────────────────────────────────────────────
+polymorphism / system F
+
+-> function types   \
++  sum types        |  monomorphic
+x  product types    |
+η  recursive types  /
+
+rather than e.g. List D (e.g. unityped = 'dynamic' untyped python)
+we want List Int, List String
+
+formally, system F, or polymorphic lambda calculus
+
+Δαtype|-t type
+--------------
+Δ|-∀α.t type
+
+Δαtype;Γ|e.t
+--------------
+Δ;Γ|-Λα.e:∀α.t
+
+Δ;Γ|-e:∀α.t
+Δ;Γ|-σ type
+-----------------
+Δ;Γ|-e[σ].t[σ/α]e
+
+we get extra reasoning principles from ∀ at the type level
+this is parametric polymorphism (...we can generalize higher still)
+    i.e. List a does the same map at every type
+
+given t1 t2, we can define the t1+t2 coproduct rules (and products)
+    with only -> and ∀ (polymorphic encodings)
+
+existential types (are abstract types)
+∃α.t
+       _Δ|-σ type __ Δ;G*|-e:[σ/α]_   (∃ introd)
+        Δ;Γ|-pack σ with e:∃α.t
+
+        (∃α.t)->σ     (∃ elim)
+           is
+        (∀α.t)->σ   says: client of an ∃ must work ∀ representations
+                          (note client doesn't know the type picked,
+                           because σ doesn't mention α)
+
+

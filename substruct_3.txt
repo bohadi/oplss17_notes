@@ -1,0 +1,85 @@
+pfenning substructural logic and concurrency 3
+────────────────────────────────────────────────
+ordered logic and concurrent programs
+
+like intuitionistic logic corresponds to functional programming
+subsingleton logic corresponds to finite state transducers
+(without cut)
+
+s = +{a:s,b:s,$:1}   <-> forward
+myst = caseL (a => R.b; <->
+             |b => R.a; myst
+             |$ => R.b;R.$; <->)
+what does this program do, it is some fs transducer
+3 state automata
+   _b|a
+  \ v    $|b$
+->(M)-------->(Qf)
+    \--->(ID)
+     a|b  /_\
+        a|a b|b $|$
+myst increments a binary number, a:b0 b:b1
+s|─myst:s
+
+consider 5 connected processes carrying 1 bit each
+Eps B1  B0  B1  B1  (representing 11)
+o - o - o - o - o
+ctr = &{inc:ctr}
+1|─              ctr
+ctr|─B0:ctr
+ctr|─B1:ctr
+1|─Eps:ctr
+B0 = caseR(inc=>B1)
+B1 = caseR(inc=>L.inc;B0)
+Eps= caseR(inc=>Eps|B1)   spawn a new process and become state B1
+this is not a finite state machine, in the last case we needed cut
+
+inc flows through the processes one at a time, but can have
+multiple inc in the system at a time
+can define a cost semantics to evaluate how much
+parallelism there is in the program
+
+can generalize to accept multiple interfaces from left
+x1:A1 x2:A2 xn:An |─ P::(z:C)
+   \x1   P uses xs, provides channel z
+x2--o-----z
+   /x3
+
+adding a fuse rule, we want
+listA = +{nil:1,
+          cons:A . listA}
+
+Turing Machine 6 rule spec
+    $ Q0 > a1 a2 ... an $
+transition fn
+    d(q,a) = (q', b, r)
+q>a
+----look right move right
+bq'>
+    d(q,a) = (q', b, l)
+q>a
+----look right move left 
+<q'b
+    d(q,a) = (q', b, r)
+a<q
+----look left move right
+bq'>
+    d(q,a) = (q', b, l)
+a<q
+----look left move left
+<q'b
+    reading blank
+$<q
+----extend tape left
+$_<q
+q>$
+----extend tape right
+q>_$
+
+now we have a spec
+need a program implementing TM
+$ ak ... a-1 <Q> a0 ... an $
+tape = +(as){a:tape, $:1}
+epat = &(as){a:epat, $:1}
+    Q> = caseR(a=>R.b;Q'>|...
+
